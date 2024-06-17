@@ -115,7 +115,7 @@ import {
 } from '@/assets/scripts/util'
 import fileApi from '../api/file'
 
-require(`codemirror/mode/javascript/javascript`)
+import 'codemirror/mode/javascript/javascript'
 
 export default {
   data() {
@@ -440,7 +440,7 @@ export default {
     onEditorRefresh() {
       this.codeThemeChanged(this.codeTheme)
       this.editorRefresh()
-      setTimeout(() => window.PR.prettyPrint(), 0)
+      // setTimeout(() => window.PR.prettyPrint(), 0)
     },
     // 复制结束
     endCopy() {
@@ -607,7 +607,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.leftAndRightScroll()
-      window.PR.prettyPrint()
+      // window.PR.prettyPrint()
     }, 300)
   },
   setup() {

@@ -2,7 +2,7 @@ import fetch from './fetch'
 import { githubConfig, giteeConfig } from './config'
 import CryptoJS from 'crypto-js'
 import OSS from 'ali-oss'
-import * as Minio from 'minio'
+// import * as Minio from 'minio'
 import COS from 'cos-js-sdk-v5'
 import Buffer from 'buffer-from'
 import { v4 as uuidv4 } from 'uuid'
@@ -229,43 +229,43 @@ async function txCOSFileUpload(file) {
 // Minio File Upload
 //-----------------------------------------------------------------------
 
-async function minioFileUpload(content, filename) {
-  const dateFilename = getDateFilename(filename)
-  const { endpoint, port, useSSL, bucket, accessKey, secretKey } = JSON.parse(
-    localStorage.getItem(`minioConfig`)
-  )
-  const buffer = Buffer(content, `base64`)
-  const conf = {
-    endPoint: endpoint,
-    useSSL: useSSL,
-    accessKey: accessKey,
-    secretKey: secretKey,
-  }
-  const p = Number(port || 0)
-  const isCustomPort = p > 0 && p !== 80 && p !== 443
-  if (isCustomPort) {
-    conf.port = p
-  }
-  return new Promise((resolve, reject) => {
-    const minioClient = new Minio.Client(conf)
-    try {
-      minioClient.putObject(bucket, dateFilename, buffer, function (e) {
-        if (e) {
-          reject(e)
-        }
-        const host = `${useSSL ? `https://` : `http://`}${endpoint}${
-          isCustomPort ? `:` + port : ``
-        }`
-        const url = `${host}/${bucket}/${dateFilename}`
-        // console.log("文件上传成功: ", url)
-        resolve(url)
-        // return `${endpoint}/${bucket}/${dateFilename}`;
-      })
-    } catch (e) {
-      reject(e)
-    }
-  })
-}
+// async function minioFileUpload(content, filename) {
+//   const dateFilename = getDateFilename(filename)
+//   const { endpoint, port, useSSL, bucket, accessKey, secretKey } = JSON.parse(
+//     localStorage.getItem(`minioConfig`)
+//   )
+//   const buffer = Buffer(content, `base64`)
+//   const conf = {
+//     endPoint: endpoint,
+//     useSSL: useSSL,
+//     accessKey: accessKey,
+//     secretKey: secretKey,
+//   }
+//   const p = Number(port || 0)
+//   const isCustomPort = p > 0 && p !== 80 && p !== 443
+//   if (isCustomPort) {
+//     conf.port = p
+//   }
+//   return new Promise((resolve, reject) => {
+//     const minioClient = new Minio.Client(conf)
+//     try {
+//       minioClient.putObject(bucket, dateFilename, buffer, function (e) {
+//         if (e) {
+//           reject(e)
+//         }
+//         const host = `${useSSL ? `https://` : `http://`}${endpoint}${
+//           isCustomPort ? `:` + port : ``
+//         }`
+//         const url = `${host}/${bucket}/${dateFilename}`
+//         // console.log("文件上传成功: ", url)
+//         resolve(url)
+//         // return `${endpoint}/${bucket}/${dateFilename}`;
+//       })
+//     } catch (e) {
+//       reject(e)
+//     }
+//   })
+// }
 
 //-----------------------------------------------------------------------
 // formCustom File Upload
@@ -309,8 +309,8 @@ function fileUpload(content, file) {
   switch (imgHost) {
     case `aliOSS`:
       return aliOSSFileUpload(content, file.name)
-    case `minio`:
-      return minioFileUpload(content, file.name)
+    // case `minio`:
+    //   return minioFileUpload(content, file.name)
     case `txCOS`:
       return txCOSFileUpload(file)
     case `qiniu`:

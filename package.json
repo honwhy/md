@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint src",
     "start": "npm run lint -- --fix && run-p serve",
     "serve": "vue-cli-service serve",
+    "serve:vite": "vite",
     "build:h5-netlify": "cross-env SERVER_ENV=NETLIFY vue-cli-service build",
     "build": "vue-cli-service build",
     "build-cli": "npm run build && npx shx rm -rf md-cli/dist && npx shx rm -rf dist/**/*.map && npx shx cp -r dist md-cli/ && cd md-cli && npm pack"
@@ -36,10 +37,13 @@
     "vue": "^2.7.14"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue2": "^2.3.1",
     "@vue/cli-plugin-babel": "^4.5.19",
     "@vue/cli-plugin-eslint": "^4.5.19",
     "@vue/cli-service": "^4.5.15",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "@tsconfig/node-lts": "^20.1.0",
     "async-validator": "^4.0.7",
     "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.3",
@@ -58,6 +62,7 @@
     "prettier": "^2.8.8",
     "raw-loader": "^4.0.2",
     "shx": "^0.3.4",
-    "vue-template-compiler": "^2.7.14"
+    "vue-template-compiler": "^2.7.14",
+    "vue-tsc": "^1.8.26"
   }
 }

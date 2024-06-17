@@ -1,4 +1,4 @@
-import marked, { Renderer } from "marked";
+import { marked, Renderer } from "marked";
 import hljs from "highlight.js";
 import markedKatex from "marked-katex-extension";
 
