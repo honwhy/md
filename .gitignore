@@ -46,3 +46,6 @@ httpData
 public/upload/**
 !public/upload/*.gitkeep
 .history
+.output
+.wxt
+web-ext.config.ts

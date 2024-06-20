@@ -11,7 +11,15 @@
     "serve:vite": "vite",
     "build:h5-netlify": "cross-env SERVER_ENV=NETLIFY vue-cli-service build",
     "build": "vue-cli-service build",
-    "build-cli": "npm run build && npx shx rm -rf md-cli/dist && npx shx rm -rf dist/**/*.map && npx shx cp -r dist md-cli/ && cd md-cli && npm pack"
+    "build-cli": "npm run build && npx shx rm -rf md-cli/dist && npx shx rm -rf dist/**/*.map && npx shx cp -r dist md-cli/ && cd md-cli && npm pack",
+    "dev:wxt": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build:wxt": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "vue-tsc --noEmit",
+    "postinstall": "wxt prepare"
   },
   "dependencies": {
     "ali-oss": "^6.17.1",
@@ -63,6 +71,8 @@
     "raw-loader": "^4.0.2",
     "shx": "^0.3.4",
     "vue-template-compiler": "^2.7.14",
-    "vue-tsc": "^1.8.26"
+    "vue-tsc": "^1.8.26",
+    "typescript": "^5.3.3",
+    "wxt": "^0.18.0"
   }
 }

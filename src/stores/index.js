@@ -4,9 +4,9 @@ import CodeMirror from 'codemirror/lib/codemirror'
 
 import config from '../assets/scripts/config'
 import WxRenderer from '../assets/scripts/renderers/wx-renderer'
-import DEFAULT_CONTENT from '@/assets/example/markdown.md'
-import DEFAULT_CSS_CONTENT from '@/assets/example/theme-css.txt'
-import { setColor, formatDoc, formatCss } from '@/assets/scripts/util'
+import DEFAULT_CONTENT from '../assets/example/markdown.md?raw'
+import DEFAULT_CSS_CONTENT from '../assets/example/theme-css.txt?raw'
+import { setColor, formatDoc, formatCss } from '../assets/scripts/util'
 
 const defaultKeyMap = CodeMirror.keyMap[`default`]
 const modPrefix =

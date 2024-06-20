@@ -94,13 +94,13 @@
 import { mapState, mapActions } from 'pinia'
 import { useStore } from '@/stores'
 
-import EditorHeader from '@/components/CodemirrorEditor/EditorHeader/index'
-import AboutDialog from '@/components/CodemirrorEditor/AboutDialog'
-import InsertFormDialog from '@/components/CodemirrorEditor/InsertFormDialog'
-import RightClickMenu from '@/components/CodemirrorEditor/RightClickMenu'
-import UploadImgDialog from '@/components/CodemirrorEditor/UploadImgDialog'
-import CssEditor from '@/components/CodemirrorEditor/CssEditor'
-import RunLoading from '@/components/RunLoading'
+import EditorHeader from '@/components/CodemirrorEditor/EditorHeader/index.vue'
+import AboutDialog from '@/components/CodemirrorEditor/AboutDialog.vue'
+import InsertFormDialog from '@/components/CodemirrorEditor/InsertFormDialog.vue'
+import RightClickMenu from '@/components/CodemirrorEditor/RightClickMenu.vue'
+import UploadImgDialog from '@/components/CodemirrorEditor/UploadImgDialog.vue'
+import CssEditor from '@/components/CodemirrorEditor/CssEditor.vue'
+import RunLoading from '@/components/RunLoading.vue'
 
 import {
   css2json,
