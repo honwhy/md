@@ -12,7 +12,8 @@ export default defineConfig({
     permissions: ['storage'],
     host_permissions: [
       'https://*.aliyuncs.com/*',
-      'https://cdn.jsdelivr.net/*'
+      'https://cdn.jsdelivr.net/*',
+      'https://api.weixin.qq.com/*'
     ],
     web_accessible_resources: [
       {

@@ -271,6 +271,47 @@ async function txCOSFileUpload(file) {
 // formCustom File Upload
 //-----------------------------------------------------------------------
 
+//-----------------------------------------------------------------------
+// mp File Upload
+//-----------------------------------------------------------------------
+
+async function getMpToken(appID, appsecret) {
+  let data = localStorage.getItem(`mpToken`)
+  if (data) {
+    let token = JSON.parse(data)
+    if (token.expire > new Date().getTime()) {
+      return token.access_token
+    }
+  }
+  const res = await fetch({
+    url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appID}&secret=${appsecret}`,
+    method: `GET`,
+  })
+  const tokenInfo = {
+    ...res,
+    expire: new Date().getTime() + res.expires_in * 1000,
+  }
+  localStorage.setItem(`mpToken`, JSON.stringify(tokenInfo))
+  return res.access_token
+}
+async function mpFileUpload(file) {
+  // const dateFilename = getDateFilename(file.name)
+  const { appID, appsecret } = JSON.parse(
+    localStorage.getItem(`mpConfig`)
+  )
+  // get access token
+  const access_token = await getMpToken(appID, appsecret)
+  const formdata = new FormData()
+  formdata.append('media', file, file.name)
+  const requestOptions = {
+    method: 'POST',
+    data: formdata
+ }
+ const url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${access_token}&type=image`
+ const res = await fetch(url, requestOptions)
+ console.log('mp upload result', res)
+ return res.url
+}
 async function formCustomUpload(content, file) {
   const str = `
     async (CUSTOM_ARG) => {
@@ -319,6 +360,8 @@ function fileUpload(content, file) {
       return giteeUpload(content, file.name)
     case `github`:
       return ghFileUpload(content, file.name)
+    case `mp`:
+      return mpFileUpload(file)
     case `formCustom`:
       return formCustomUpload(content, file)
     default:

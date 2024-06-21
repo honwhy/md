@@ -347,6 +347,33 @@
           </el-form-item>
         </el-form>
       </el-tab-pane>
+      <el-tab-pane class="github-panel" label="公众号" name="mp">
+        <el-form
+          class="setting-form"
+          :model="formMp"
+          label-position="right"
+          label-width="140px"
+        >
+          <el-form-item label="appID" :required="true">
+            <el-input
+              v-model.trim="formMp.appID"
+              placeholder="如：wx694b82ee516a58dd"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="appsecret" :required="true">
+            <el-input
+              v-model.trim="formMp.appsecret"
+              show-password
+              placeholder="如：3e02ed29ec8c7510e2d598bad479ddef"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="saveMpConfiguration">
+              保存配置
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-tab-pane>
       <el-tab-pane
         class="github-panel formCustom"
         label="自定义代码"
@@ -441,6 +468,10 @@ export default {
         accessKey: ``,
         secretKey: ``,
       },
+      formMp: {
+        appID: ``,
+        appsecret: ``,
+      },
       formCustom: {
         code:
           localStorage.getItem(`formCustomConfig`) ||
@@ -488,6 +519,10 @@ export default {
           label: `MinIO`,
         },
         {
+          value: `mp`,
+          label: `公众号`,
+        },
+        {
           value: `formCustom`,
           label: `自定义代码`,
         },
@@ -513,6 +548,9 @@ export default {
     }
     if (localStorage.getItem(`minioConfig`)) {
       this.minioOSS = JSON.parse(localStorage.getItem(`minioConfig`))
+    }
+    if (localStorage.getItem(`mpConfig`)) {
+      this.formMp = JSON.parse(localStorage.getItem(`mpConfig`))
     }
     if (localStorage.getItem(`imgHost`)) {
       this.imgHost = localStorage.getItem(`imgHost`)
@@ -601,6 +639,19 @@ export default {
         return
       }
       localStorage.setItem(`qiniuConfig`, JSON.stringify(this.formQiniu))
+      this.$message.success(`保存成功`)
+    },
+    saveMpConfiguration() {
+      if (
+        !(
+          this.formMp.appID &&
+          this.formMp.appsecret
+        )
+      ) {
+        this.$message.error(`公众号素材库参数配置不全`)
+        return
+      }
+      localStorage.setItem(`mpConfig`, JSON.stringify(this.formMp))
       this.$message.success(`保存成功`)
     },
     formCustomSave() {
