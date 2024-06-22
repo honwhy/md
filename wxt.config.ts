@@ -8,9 +8,13 @@ export default defineConfig({
   publicDir: '../public',
   manifest: ({ mode }) => ({
     version: '0.0.1',
-    name: mode === 'development' ? 'md公众号文章编辑器-dev' : 'md公众号文章编辑器',
+    name: mode === 'development' ? 'MpMd编辑器-dev' : 'MpMd编辑器',
     permissions: ['storage'],
     host_permissions: [
+      'https://*.github.com/*',
+      '*://*.githubusercontent.com/*',
+      'https://fastly.jsdelivr.net/*',
+      'https://gitee.com/*',
       'https://*.aliyuncs.com/*',
       'https://cdn.jsdelivr.net/*',
       'https://api.weixin.qq.com/*'
