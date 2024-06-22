@@ -276,7 +276,7 @@ async function txCOSFileUpload(file) {
 //-----------------------------------------------------------------------
 
 async function getMpToken(appID, appsecret) {
-  let data = localStorage.getItem(`mpToken`)
+  let data = localStorage.getItem(`mpToken:${appID}`)
   if (data) {
     let token = JSON.parse(data)
     if (token.expire > new Date().getTime()) {
@@ -291,7 +291,7 @@ async function getMpToken(appID, appsecret) {
     ...res,
     expire: new Date().getTime() + res.expires_in * 1000,
   }
-  localStorage.setItem(`mpToken`, JSON.stringify(tokenInfo))
+  localStorage.setItem(`mpToken:${appID}`, JSON.stringify(tokenInfo))
   return res.access_token
 }
 async function mpFileUpload(file) {
