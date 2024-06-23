@@ -8,7 +8,7 @@ export default defineConfig({
   publicDir: '../public',
   manifest: ({ mode }) => ({
     version: '0.0.1',
-    name: mode === 'development' ? 'MpMd编辑器-dev' : 'MpMd编辑器',
+    name: mode === 'development' ? '公众号文章编辑器-dev' : '公众号文章编辑器',
     permissions: ['storage'],
     host_permissions: [
       'https://*.github.com/*',
@@ -38,6 +38,16 @@ export default defineConfig({
     build: {
       // Enabling sourcemaps with Vue during development is known to cause problems with Vue
       sourcemap: false,
+      // rollupOptions: {
+      //   output: {
+      //     format: 'esm',
+      //     inlineDynamicImports: false,
+      //     manualChunks: {
+      //       lodash: ['lodash'],
+      //       vue: ['vue']
+      //     }
+      //   },
+      // },
     },
     assetsInclude: ['**/*.md'],
     define: {
