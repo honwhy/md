@@ -1,7 +1,8 @@
 import fetch from './fetch'
 import { githubConfig, giteeConfig } from './config'
 import CryptoJS from 'crypto-js'
-import OSS from 'ali-oss'
+// import OSS from 'ali-oss'
+import TinyOSS from 'tiny-oss'
 // import * as Minio from 'minio'
 import COS from 'cos-js-sdk-v5'
 import Buffer from 'buffer-from'
@@ -172,7 +173,7 @@ async function aliOSSFileUpload(content, filename) {
     JSON.parse(localStorage.getItem(`aliOSSConfig`))
   const buffer = Buffer(content, `base64`)
   const dir = `${path}/${dateFilename}`
-  const client = new OSS({
+  const client = new TinyOSS({
     region,
     bucket,
     accessKeyId,
@@ -325,7 +326,8 @@ async function formCustomUpload(content, file) {
       util: {
         axios: fetch, // axios 实例
         CryptoJS, // 加密库
-        OSS, // ali-oss
+        // OSS, // ali-oss
+        TinyOSS,
         COS, // cos-js-sdk-v5
         Buffer, // buffer-from
         uuidv4, // uuid
