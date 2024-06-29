@@ -297,21 +297,19 @@ async function getMpToken(appID, appsecret) {
 }
 async function mpFileUpload(file) {
   // const dateFilename = getDateFilename(file.name)
-  const { appID, appsecret } = JSON.parse(
-    localStorage.getItem(`mpConfig`)
-  )
+  const { appID, appsecret } = JSON.parse(localStorage.getItem(`mpConfig`))
   // get access token
   const access_token = await getMpToken(appID, appsecret)
   const formdata = new FormData()
-  formdata.append('media', file, file.name)
+  formdata.append(`media`, file, file.name)
   const requestOptions = {
-    method: 'POST',
-    data: formdata
- }
- const url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${access_token}&type=image`
- const res = await fetch(url, requestOptions)
- console.log('mp upload result', res)
- return res.url
+    method: `POST`,
+    data: formdata,
+  }
+  const url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${access_token}&type=image`
+  const res = await fetch(url, requestOptions)
+  console.log(`mp upload result`, res)
+  return res.url
 }
 async function formCustomUpload(content, file) {
   const str = `

@@ -190,7 +190,7 @@ import { useStore } from '@/stores'
 
 import { setFontSize, setColorWithCustomTemplate } from '@/assets/scripts/util'
 import { solveWeChatImage, mergeCss } from '@/assets/scripts/converter'
-import DEFAULT_CSS_CONTENT from '@/assets/example/theme-css.txt'
+import DEFAULT_CSS_CONTENT from '@/assets/example/theme-css.txt?raw'
 import config from '@/assets/scripts/config'
 import ResetDialog from './ResetDialog.vue'
 import StyleOptionMenu from './StyleOptionMenu.vue'
