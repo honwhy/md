@@ -7,7 +7,7 @@ export default defineConfig({
   root: 'src',
   publicDir: '../public',
   manifest: ({ mode }) => ({
-    version: '0.0.2',
+    version: '0.0.3',
     name: mode === 'development' ? '公众号文章编辑器-dev' : '公众号文章编辑器',
     permissions: ['storage'],
     host_permissions: [
