@@ -494,6 +494,10 @@ export default {
           value: `default`,
           label: `默认`,
         },
+        {
+          value: `mp`,
+          label: `公众号`,
+        },
         // {
         //   value: `gitee`,
         //   label: `Gitee`,
@@ -517,10 +521,6 @@ export default {
         {
           value: `minio`,
           label: `MinIO`,
-        },
-        {
-          value: `mp`,
-          label: `公众号`,
         },
         {
           value: `formCustom`,

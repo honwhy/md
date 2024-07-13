@@ -280,26 +280,38 @@ async function getMpToken(appID, appsecret) {
   let data = localStorage.getItem(`mpToken:${appID}`)
   if (data) {
     let token = JSON.parse(data)
-    if (token.expire > new Date().getTime()) {
+    if (token.expire && token.expire > new Date().getTime()) {
       return token.access_token
     }
   }
-  const res = await fetch({
-    url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appID}&secret=${appsecret}`,
-    method: `GET`,
-  })
-  const tokenInfo = {
-    ...res,
-    expire: new Date().getTime() + res.expires_in * 1000,
+  const requestOptions = {
+    method: `POST`,
+    data: {
+      "grant_type": "client_credential",
+      "appid": appID,
+      "secret": appsecret
+    }
   }
-  localStorage.setItem(`mpToken:${appID}`, JSON.stringify(tokenInfo))
-  return res.access_token
+  const url = `https://api.weixin.qq.com/cgi-bin/stable_token`
+  const res = await fetch(url, requestOptions)
+  if (res.access_token) {
+    const tokenInfo = {
+      ...res,
+      expire: new Date().getTime() + res.expires_in * 1000,
+    }
+    localStorage.setItem(`mpToken:${appID}`, JSON.stringify(tokenInfo))
+    return res.access_token
+  }
+  throw Error(res.errcode, res.errmsg)
 }
 async function mpFileUpload(file) {
   // const dateFilename = getDateFilename(file.name)
   const { appID, appsecret } = JSON.parse(localStorage.getItem(`mpConfig`))
   // get access token
-  const access_token = await getMpToken(appID, appsecret)
+  const access_token = await getMpToken(appID, appsecret).catch(e => console.error(e))
+  if (!access_token) {
+    throw Error(`获取 access_token 失败，请检查console日志`)
+  }
   const formdata = new FormData()
   formdata.append(`media`, file, file.name)
   const requestOptions = {
